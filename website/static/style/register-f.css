@@ -1,0 +1,19 @@
+.form{
+    max-width: 500px;
+}
+
+.sub-header{
+    height: 55px;
+    color: white;
+    background: #8967B3;
+}
+
+.register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-body{
+    width: 500px;
+}

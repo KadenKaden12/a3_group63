@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/event.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not events %}
+    <h3>You haven't create any event</h3>
+    {% endif %}
+
+    <div class="event">
+        <div class="event-body">
+            {% for event in events %}
+            <div class="row">
+                <div class="">
+                  <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Event Name:  {{event.event_name}}</h5>
+                        <p class="card-text">Event Date:  {{event.event_date}}</p>
+                        <p class="card-text">Available Tickets: {{event.no_of_tickets}}</p>
+                        <a href="/event/{{event.id}}/edit">Edit Event</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

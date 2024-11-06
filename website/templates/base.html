@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IAB207 Assignment 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/base.css') }}">
+    {% block styles %}
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+
+        <!-- Navbar -->
+        <nav>
+            <!-- Your navbar should go here -->
+            <div class="container nav-bar p-1 z-3">
+                <div class="row align-items-center">
+                  <div class="col-1">
+                    <img class="menu" src= "{{ url_for('static', filename='img/bars-solid.svg') }}" alt="menu..">
+                  </div>
+                  <div class="col nav text-center">
+                    <div class="row">
+                      <div class="col p-0">
+                        <a class="link" href="/">Home</a>
+                      </div>
+                      <div class="col p-0">
+                        {% if user and user.is_authenticated %}
+                        <a class="link" href='/register-event'>Register Yours</a>
+                        {% else %}
+                        <a class="link" href='/login'>Login to register event</a>
+                        {% endif %}
+                      </div>
+                      <div class="col p-0">
+                        <a class="link" href="/orders">Bookings</a>
+                      </div>
+                      <div class="col p-0">
+                        <a class="link" href="/my-events">My Events</a>
+                      </div>
+                    </div>
+                  </div>
+                    
+                  <div class="col white text-end">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary">{{ user.user_name if user and user.is_authenticated else 'Guest User' }}</button>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        {% if user and user.is_authenticated %}
+                        <li><a class="dropdown-item" href="/logout">logout</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="/login">login</a></li>
+                        <li><a class="dropdown-item" href="/register">register</a></li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Code for using Flask flash -->
+        <div class="container-fluid">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">x</button>
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+        {% block header %}
+        {% endblock %}
+
+    </header>
+    <main>
+    {% block content %}
+    {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <!-- Your footer should go here -->
+        <div class="container text-center">
+            <p class="h3">Contact us for further inquiry...</p>
+            <div>
+              <img class="" src="static/img/fb-solid.svg" width="2%">
+              <a href="www.facebook.com/festbook">Join on Facebook</a>
+            </div>
+            <div>
+              <img class="" src="static/img/x-solid.svg" width="2%">
+              <a href="www.twitter.com/festbook">Join on X</a>
+            </div>
+            <div>
+              <img class="" src="static/img/mail-solid.svg" width="2%">
+              <a href="mailto:front@festbook.org">Email Us</a>
+            </div>
+        </div>
+        
+    </footer>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>

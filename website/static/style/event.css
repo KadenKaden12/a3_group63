@@ -1,0 +1,19 @@
+.event-pic{
+    height: 350px;
+}
+
+.register-event{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-event-body{
+    width: 500px;
+}
+
+@media (min-width: 768px){
+    .event-pic{
+        height: 100%;
+    }
+}

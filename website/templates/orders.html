@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/order.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not orders %}
+    <h3>You haven't order or book any event</h3>
+    {% endif %}
+
+    <div class="order">
+        <div class="order-body">
+            {% for order in orders %}
+            <div class="row">
+                <div class="">
+                  <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID: {{ order.id }}</h5>
+                        <p class="card-text">Issued Date: {{order.order_date}}</p>
+                        <p class="card-text">Event:  {{order.event.event_name}}</p>
+                        <p class="card-text">Ordered tickets: {{order.no_of_tickets}}</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+</div>
+
+
+
+
+{% endblock %}

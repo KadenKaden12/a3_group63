@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/order.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="order">
+        <div class="order-body">
+            <div class="row">
+                <div class="">
+                  <div class="card">
+                    <div class="card-body">
+                        <h2>Your Order is Confirmed</h2>
+                        <h5 class="card-title">Order ID {{ order.id }}</h5>
+                        <p class="card-text">Issued Date {{order.order_date}}</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+{% endblock %}

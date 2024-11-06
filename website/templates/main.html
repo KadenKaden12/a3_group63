@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/home.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+
+    <!-- nav bar -->
+      
+      <!-- banner -->
+      <div class="banner container">
+        <img width="100%" class="img-fluid" src="static/img/Banner.png" alt="">
+      </div>
+
+      <!-- nav for phone -->
+      <div class="row ph-nav text-center align-items-center">
+        <div class="col p-0">
+          <a class="link" href="/">Home</a>
+        </div>
+        <div class="col-6 p-0">
+          <a class="link" href="/register">Register Yours</a>
+        </div>
+        <div class="col p-0">
+          <a class="link" href="bookings.html">Booking</a>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="container mt-1 search">
+        <div class="row align-items-center">
+          <div class="col text-end p-0">
+            
+          </div>
+          <form action="/" method="get" class="">
+            <div class="col p-0">
+              <input type="text" class="form-control" placeholder="Search events" name="search">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+           </form>
+        </div>
+      </div>
+
+      <!-- featured events title + categories -->
+      <div class="row justify-content-between">
+        <div class="col">
+          <p class="h2 sub-header"><strong>Featured Events</strong></p>
+        </div>
+        <div class="col">
+          <div class="dropdown text-end">
+            Browse By
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </button>
+            <ul class="dropdown-menu">
+              {% for category in categories %}
+                <li><a class="dropdown-item" href="/?category={{ category.id }}">{{ category.category_name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div> 
+        </div>
+      </div>
+      
+      <!-- featured events -->
+      
+      <div class="container">
+        {% for event in events %}
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ event.event_name }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ event.status.status_name }}</h6>
+            <p class="card-text">{{ event.category.category_name }} <br/>
+            Location: {{ event.location }}<br/>
+            Date: {{ event.event_date }}</p>
+            <a href="/event/{{ event.id }}" class="card-link">Visit Event</a>
+          </div>
+        </div>
+        <br/>
+        {% endfor %}
+
+      </div>
+
+
+      <!-- footer -->
+      
+
+
+  <!-- end of root container -->
+</div>
+{% endblock %}
+

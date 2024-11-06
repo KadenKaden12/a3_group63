@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/event-s.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-5">
+                <img class="event-pic" width="100%" src="{{ url_for('static', filename='img/event-0.jpg') }}" alt="">
+            </div>
+            <div class="col col-md-7 align-self-center">
+                <div class="text-center">
+                    <h1 class="title">{{event.event_name}}</h2>
+                    <h3 class="date"> {{ event.event_date.strftime('%A') }} | {{event.event_date}}</h3>
+                    <h3 class="time">{{event.start_from}} ~ {{event.end_to}}</h3>
+                    <hr/>
+                    <p class="location h4">{{event.location}}</p>
+                    <p class="disc">{{ event.description }}</p>
+                    <hr>
+                    <p>Tickets Available - <strong>{{event.no_of_tickets}}</strong></p>
+                    <p><Strong>Book Now!!!</Strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container booking p-2">
+        <form action="/event/{{event.id}}/order" method="post">
+            {{ form.hidden_tag() }} 
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Mr.Drake" value="{{ user.first_name + ' ' + user.sur_name if user and user.is_authenticated else '' }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" placeholder="name@example.com" value="{{ user.email if user and user.is_authenticated else '' }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Number of Tickets</label>
+                {{ form.no_of_tickets(class="form-control", min=1) }}
+                <!-- <input type="number" class="form-control" min="1" name="no_of_tickets"> -->
+            </div>
+            {% if user and user.is_authenticated %}
+                <button type="submit" class="btn btn-primary text-center">Book</button>
+            {% else %}
+                <p>Please login to buy tickets</p>
+            {% endif %}
+
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}
